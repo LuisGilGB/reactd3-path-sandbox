@@ -20,8 +20,15 @@ export const bezierCurveTo = (
   y
 ) => `C ${controlX1} ${controlY1} ${controlX2} ${controlY2} ${x} ${y}`;
 
-export const arcTo = (rx, ry, rotation, largeArcFlag, sweepFlag, x, y) =>
-  `A ${rx} ${ry} ${rotation} ${largeArcFlag} ${sweepFlag} ${x} ${y}`;
+export const arcTo = (
+  rx = 0,
+  ry = 0,
+  rotation = 0,
+  largeArcFlag = 0,
+  sweepFlag = 0,
+  x = 0,
+  y = 0
+) => `A ${rx} ${ry} ${rotation} ${largeArcFlag} ${sweepFlag} ${x} ${y}`;
 
-export const circArcTo = (r, rotation, largeArcFlag, sweepFlag, x, y) =>
-  arcTo(r, r, rotation, largeArcFlag, sweepFlag, x, y);
+export const circArcTo = (r, largeArcFlag, sweepFlag, x, y) =>
+  arcTo(r, r, 0, largeArcFlag, sweepFlag, x, y);
