@@ -1,6 +1,7 @@
 import React, { useState } from "react";
+import JSONTree from "react-json-tree";
 import Path from "./path/Path";
-import { Box, Flex, Text, Button } from "rebass";
+import { Box, Flex, Button } from "rebass";
 import Form from "./form/Form";
 import { getElOffset, getSvgEl } from "./utils";
 import "./styles.css";
@@ -41,15 +42,15 @@ export default function App() {
             {points.map((p, i) => (
               <Box
                 key={i}
-                width={100}
                 m={1}
                 sx={{
+                  textAlign: "left",
                   flexWrap: "wrap",
                   textOverflow: "ellipsis",
                   whiteSpace: "initial"
                 }}
               >
-                <Text>{JSON.stringify(p)}</Text>
+                <JSONTree data={p} hideRoot />
               </Box>
             ))}
           </Box>
