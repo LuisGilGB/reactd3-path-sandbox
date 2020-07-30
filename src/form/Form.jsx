@@ -31,7 +31,17 @@ const Form = props => {
     >
       <NumberField m={2} name="x" label="x" value={x} onChange={onXChange} />
       <NumberField m={2} name="y" label="y" value={y} onChange={onYChange} />
-      <Button m={2}>Add</Button>
+      <Button
+        m={2}
+        sx={{
+          ":hover": {
+            bg: "tomato",
+            cursor: "pointer"
+          }
+        }}
+      >
+        Add
+      </Button>
     </Box>
   );
 };
