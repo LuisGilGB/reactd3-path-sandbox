@@ -43,8 +43,12 @@ const Form = props => {
           </option>
         ))}
       </Select>
-      <NumberField m={2} name="x" label="x" value={x} onChange={onXChange} />
-      <NumberField m={2} name="y" label="y" value={y} onChange={onYChange} />
+      {type !== "vertical" && (
+        <NumberField m={2} name="x" label="x" value={x} onChange={onXChange} />
+      )}
+      {type !== "horizontal" && (
+        <NumberField m={2} name="y" label="y" value={y} onChange={onYChange} />
+      )}
       <Button
         m={2}
         sx={{
