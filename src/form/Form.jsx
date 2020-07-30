@@ -26,7 +26,6 @@ const Form = props => {
       display="inline-flex"
       flexDirection="column"
       alignItems="stretch"
-      width={240}
       p={1}
       onSubmit={onSubmit}
     >
