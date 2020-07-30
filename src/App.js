@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import Path from "./path/Path";
-import { Box, Flex, Button } from "rebass";
+import { Box, Flex, Text, Button } from "rebass";
 import Form from "./form/Form";
 import { getElOffset, getSvgEl } from "./utils";
 import "./styles.css";
 
 export default function App() {
   const [points, setPoints] = useState([]);
+  const [currentSubPathType, setCurrentSubPathType] = useState("line");
 
   const addPoint = newPoint => {
     setPoints([...points, newPoint]);
@@ -17,6 +18,7 @@ export default function App() {
     if (svgEl) {
       const offset = getElOffset(svgEl);
       addPoint({
+        type: currentSubPathType,
         x: e.pageX - offset.x,
         y: e.pageY - offset.y
       });
@@ -37,23 +39,38 @@ export default function App() {
           </Box>
           <Box p={2}>
             {points.map((p, i) => (
-              <Box key={i} flexWrap="wrap" m={1}>
-                {JSON.stringify(p)}
+              <Box
+                key={i}
+                width={100}
+                m={1}
+                sx={{
+                  flexWrap: "wrap",
+                  textOverflow: "ellipsis",
+                  whiteSpace: "initial"
+                }}
+              >
+                <Text>{JSON.stringify(p)}</Text>
               </Box>
             ))}
           </Box>
-          <Form addPoint={addPoint} />
+          <Form
+            addPoint={addPoint}
+            type={currentSubPathType}
+            setType={setCurrentSubPathType}
+          />
         </Box>
         <Box mx={3} minWidth={600} width={600}>
           <Box height={600} minHeight={600} sx={{ border: "2px solid black" }}>
             <svg width={600} height={600} onClick={onSvgClick}>
-              <Path
-                points={points}
-                stroke="black"
-                strokeWidth={1}
-                fill="red"
-                closePath
-              />
+              {points && points.length && (
+                <Path
+                  points={points}
+                  stroke="black"
+                  strokeWidth={1}
+                  fill="red"
+                  closePath
+                />
+              )}
             </svg>
           </Box>
           <Flex m={2}>

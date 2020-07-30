@@ -1,15 +1,22 @@
 import React, { useState } from "react";
 import { Box, Button } from "rebass";
+import { Select } from "@rebass/forms";
 import NumberField from "./NumberField";
+import { OPTIONS } from "./consts";
 
 const Form = props => {
-  const { addPoint } = props;
+  const { type, setType, addPoint } = props;
   const [x, setX] = useState(0);
   const [y, setY] = useState(0);
 
   const onSubmit = e => {
     e.preventDefault();
-    addPoint({ x, y });
+    console.log(type);
+    addPoint({ type, x, y });
+  };
+
+  const onTypeChange = e => {
+    setType(e.target.value);
   };
 
   const onXChange = value => {
@@ -29,6 +36,13 @@ const Form = props => {
       p={1}
       onSubmit={onSubmit}
     >
+      <Select name="type" value={type} onChange={onTypeChange}>
+        {OPTIONS.map(opt => (
+          <option key={opt.key} value={opt.key}>
+            {opt.label}
+          </option>
+        ))}
+      </Select>
       <NumberField m={2} name="x" label="x" value={x} onChange={onXChange} />
       <NumberField m={2} name="y" label="y" value={y} onChange={onYChange} />
       <Button

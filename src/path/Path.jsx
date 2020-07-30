@@ -20,7 +20,7 @@ const Path = props => {
         : SUBPATH_TYPE_MAP.move;
       return `${temp} ${serializer(...getParams(p))}`;
     }, "");
-    return closePathProp ? closePath(tempPath) : tempPath;
+    return (closePathProp ? closePath(tempPath) : tempPath).trim();
   };
 
   return (
